@@ -1,0 +1,154 @@
+@use 'sass:math';
+
+//<ШРИФТЫ>===============================================================================================
+
+//<Подключаем шрифты>=======================================================================================
+@import url(https://fonts.googleapis.com/css?family=Poiret+One:regular);
+//</Подключаем шрифты>=======================================================================================
+
+//<Шрифт по умолчанию>==========================================================================================
+$fontFamily: 'Poiret One', cursive;
+//</Шрифт по умолчанию>==========================================================================================
+
+//</ШРИФТЫ>=======================================================================================================
+
+//<ПЕРЕМЕННЫЕ>==========================================================================================================
+$index: calc(1vw + 1vh);
+$gutter: 30px;
+$side-small: 26;
+$side-big: 36;
+$depth: 4000px;
+$transition: 0.75s cubic-bezier(0.75, 0.5, 0, 1);
+//</ПЕРЕМЕННЫЕ>===========================================================================================================
+//<ОБНУЛЕНИЕ, ОБЩИЕ ПАРАМЕТРЫ>===========================================================================================
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  text-transform: uppercase;
+  width: min-content;
+  line-height: 1;
+}
+//</ОБНУЛЕНИЕ, ОБЩИЕ ПАРАМЕТРЫ>===========================================================================================
+
+//<ОБОЛОЧКА>===========================================================================================================
+body {
+  background-color: #000000;
+  color: #fff;
+  font-size: calc($index * 0.8);
+  font-family: $fontFamily;
+  line-height: 1.75;
+
+  height: $depth;
+}
+
+.container {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  perspective: 1500px;
+}
+//</ОБОЛОЧКА>===========================================================================================================
+
+//<ОСНОВНОЙ БЛОК>====================================================================================================
+.gallery {
+  transform-style: preserve-3d;
+  height: 100%;
+}
+
+.frame {
+  width: 100%;
+  height: 100%;
+
+  position: absolute;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  transition: $transition, opacity 0.75s ease;
+  will-change: transform;
+  transform-style: preserve-3d;
+
+  h2 {
+    text-align: center;
+    font-size: calc($index * 7);
+  }
+
+  h3 {
+    font-size: calc($index * 1.5);
+  }
+
+  p {
+    max-width: 30vw;
+    margin-bottom: 3vh;
+  }
+
+  span {
+    font-size: calc($index * 2);
+  }
+}
+
+.frame-media {
+  position: relative;
+
+  width: calc($index * $side-small);
+  height: calc($index * $side-big);
+
+  background-position: center;
+  background-size: cover;
+}
+
+.frame-media__left {
+  left: calc($side-small / 2 * $index + $gutter);
+}
+.frame-media__right {
+  right: calc($side-small / 2 * $index + $gutter);
+}
+.frame_bg {
+  background-color: rgb(0 0 0 / 0.87);
+}
+
+video {
+  .frame-media {
+    width: calc($index * $side-big);
+    height: calc($index * $side-small);
+  }
+  .frame-media__right {
+    left: calc($side-big / 2 * $index + $gutter);
+  }
+  .frame-media__left {
+    right: calc($side-big / 2 * $index + $gutter);
+  }
+}
+
+.text-right > * {
+  position: relative;
+  left: 18vw;
+}
+
+.text-left > * {
+  position: relative;
+  right: 18vw;
+}
+
+.soundbutton {
+  position: fixed;
+  bottom: 5vh;
+  right: 5vw;
+  cursor: pointer;
+  width: 24px;
+  transition: 0.25s ease;
+
+  .paused {
+    opacity: 0.25;
+  }
+}
+
+//</ОСНОВНОЙ БЛОК>====================================================================================================
